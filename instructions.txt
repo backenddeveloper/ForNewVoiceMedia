@@ -1,0 +1,19 @@
+Please write a program, which will meet the following requirement.
+
+Accept the input of 6 consecutive numbers from command line arguments (each number is one argument). Let’s call it original input.
+
+Secondly, the script must present to the user through standard output the following simple choice menu and operate accordingly in the background with the numbers the user entered previously:
+
+1) Perform subtraction and show output on screen comma separated.
+
+2) Perform multiplication and store result in a JSON file (i.e. {“InputNumber1”: x, “InputNumber2”: y, “InputNumber3”: a, “InputNumber4”: b, “InputNumber5”: c, “InputNumber6”: d, “Multiplication”: X }, where x, y, a, b, c and d are user line arguments and X is the multiplication result)
+
+3) Pick randomly a number and show it on screen.
+
+4) Print sorted (highest to lowest) array/list numbers.
+
+5) Print sorted (lowest to highest) array/list numbers
+
+Keep in mind that the script must respond appropriately upon possible human-errors. Also, the above choice menu must run forever on a loop until the user kills the program through SIGNIT or CTRL+C
+
+Optionally (as a stretch goal) the script can store the data to Sqlite DB. Desirable tables are: Datetime, Input and subtraction outcome
