@@ -39,18 +39,20 @@ Feature: The solution program
 
     Scenario Outline: It allows you to subtract an arbitary number from all inputs
         Given I have an input such as <input_numbers>
-        When I subtract a <difference>
+        When I start a new cli
+        And I subtract a <difference>
         Then I expect the cli to return <correct_output>
 
         Examples: Valid subtractions
         | input_numbers | difference | correct_output    |
         | 1 2 3 4 5 6   | 1          | 0, 1, 2, 3, 4, 5  |
-        | 8 7 6 5 4 3   | 3          | 1, 2, 3, 4, 5, 6  |
+        | 8 7 6 5 4 3   | 3          | 5, 4, 3, 2, 1, 0  |
         | 7 7 7 7 7 7   | 7          | 0, 0, 0, 0, 0, 0  |
 
     Scenario Outline: It calculates the product
         Given I have an input such as <input_numbers>
-        When I calculate a the product
+        When I start a new cli
+        And I calculate a the product
         Then I expect the cli to return a valid JSON object
         And that object should contain a key of 'Multiplication' and a value of <product>
         And that object should contain 6 keys containing 'InputNumber'
