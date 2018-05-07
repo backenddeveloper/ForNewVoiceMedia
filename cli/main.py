@@ -14,7 +14,7 @@ class Main:
         for argument in arguments:
             if re.match('.*[^1-9].*', argument) or int(argument) < 0:
                 raise Main.ValidationException('validation_error')
-        self.message = View.render('menu')
+        self.message = View.render('menu', args=arguments)
 
 
     class ValidationException(Exception):
