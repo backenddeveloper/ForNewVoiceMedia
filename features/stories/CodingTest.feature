@@ -53,7 +53,7 @@ Feature: The solution program
         Given I have an input such as <input_numbers>
         When I start a new cli
         And I calculate a the product
-        Then I expect the cli to return a valid JSON object
+        Then I expect the returned object to be valid JSON
         And that object should contain a key of 'Multiplication' and a value of <product>
         And that object should contain 6 keys containing 'InputNumber'
 

@@ -1,4 +1,6 @@
+import json
 from behave import given, then, when
+from mock import MagicMock as Mock
 
 from cli.exceptions import FinishedException, ValidationException
 from cli.main import Main
@@ -32,6 +34,15 @@ def step_impl(context, number):
         context.output = context.test_subject.message
 
 
+@when(u'I calculate a the product')
+def step_impl(context):
+    try:
+        context.test_subject = context.test_subject.dispatch(2)
+        context.test_subject = context.test_subject.dispatch('testfilename', open=Mock(return_value=Mock()))
+    except FinishedException, exception:
+        context.output = context.test_subject.message
+
+
 @then(u'the input validation fails')
 def step_impl(context):
     assert hasattr(context, 'exception')
@@ -50,3 +61,18 @@ def step_impl(context, template):
 @then(u'I expect the cli to return {output}')
 def step_impl(context, output):
     assert context.test_subject.message == View.render('subtraction_output', args=[ int(x) for x in output.split(', ')])
+
+
+@then(u'I expect the returned object to be valid JSON')
+def step_impl(context):
+    json.loads(context.output)
+
+
+@then(u'that object should contain a key of \'{key}\' and a value of {value:d}')
+def step_impl(context, key, value):
+    assert json.loads(context.output)[key] == value
+
+
+@then(u'that object should contain {count:d} keys containing \'{key_part}\'')
+def step_impl(context, count, key_part):
+    assert len(filter(lambda x: key_part in x, json.loads(context.output).keys())) == count
