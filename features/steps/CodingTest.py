@@ -29,10 +29,9 @@ def step_impl(context):
 
 @then(u'a {template} error is returned to the user')
 def step_impl(context, template):
-    print(context.exception.message)
-    assert context.exception.message == View.render(template)
+    assert context.exception.message == View.render(template, args=context.input)
 
 
 @then(u'a {template} output is returned to the user')
 def step_impl(context, template):
-    assert context.test_subject.message == View.render(template)
+    assert context.test_subject.message == View.render(template, args=context.input)
