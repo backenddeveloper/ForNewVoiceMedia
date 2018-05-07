@@ -1,0 +1,9 @@
+Your entered numbers are:
+    {{ args }}
+
+Please choose from the following options:
+
+  1) subtract a number from each of the above and print the result
+  2) Calcualate a product/multiplication and save it as a JSON file
+  3) print the numbers from highest to lowest
+  4) print the numbers from lowest to highest
