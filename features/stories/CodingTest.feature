@@ -7,7 +7,7 @@ Feature: The solution program
         Given I have an input such as <invalid_input>
         When I validate it
         Then the input validation fails
-        And a validation_error error is returned to the user
+        And a initial_validation_error error is returned to the user
 
         Examples: invalid charactors
             | invalid_input |
@@ -62,3 +62,27 @@ Feature: The solution program
         | 1 2 3 4 5 6   | 720     |
         | 2 3 4 5 6 7   | 5040    |
         | 3 4 5 6 7 8   | 20160   |
+
+    Scenario Outline: It orders highest to lowest
+        Given I have an input such as <input_numbers>
+        When I start a new cli
+        And I order the numbers highest to lowest
+        Then I expect the cli to return <correct_output>
+
+        Examples: highest to lowest
+        | input_numbers | correct_output   |
+        | 1 2 3 4 5 6   | 6, 5, 4, 3, 2, 1 |
+        | 6 5 4 3 2 1   | 6, 5, 4, 3, 2, 1 |
+        | 5 8 3 6 7 4   | 8, 7, 6, 5, 4, 3 |
+
+    Scenario Outline: It orders lowest to highest
+        Given I have an input such as <input_numbers>
+        When I start a new cli
+        And I order the numbers lowest to highest
+        Then I expect the cli to return <correct_output>
+
+        Examples: lowest to highest
+        | input_numbers | correct_output   |
+        | 1 2 3 4 5 6   | 1, 2, 3, 4, 5, 6 |
+        | 6 5 4 3 2 1   | 1, 2, 3, 4, 5, 6 |
+        | 5 8 3 6 7 4   | 3, 4, 5, 6, 7, 8 |

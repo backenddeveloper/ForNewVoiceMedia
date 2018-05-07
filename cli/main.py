@@ -1,5 +1,7 @@
 import re
 from cli.exceptions import ValidationException
+from cli.highest import Highest
+from cli.lowest import Lowest
 from cli.multiplication import Multiplication
 from cli.subtraction import Subtraction
 from cli.view import View
@@ -23,7 +25,7 @@ class Main:
 
 
     def dispatch(self, stdin):
-        promise_classes = [Subtraction, Multiplication]
+        promise_classes = [Subtraction, Multiplication, Highest, Lowest]
         try:
             '''
             Here we change the offset of the array to zero indexed and dispatch a new promise

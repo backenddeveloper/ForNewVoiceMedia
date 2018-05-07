@@ -1,4 +1,0 @@
-
-Your subtracted numbers are:
-    {{ args }}
-

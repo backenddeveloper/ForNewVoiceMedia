@@ -43,6 +43,22 @@ def step_impl(context):
         context.output = context.test_subject.message
 
 
+@when(u'I order the numbers highest to lowest')
+def step_impl(context):
+    try:
+        context.test_subject = context.test_subject.dispatch(3)
+    except FinishedException, exception:
+        context.output = context.test_subject.message
+
+
+@when(u'I order the numbers lowest to highest')
+def step_impl(context):
+    try:
+        context.test_subject = context.test_subject.dispatch(4)
+    except FinishedException, exception:
+        context.output = context.test_subject.message
+
+
 @then(u'the input validation fails')
 def step_impl(context):
     assert hasattr(context, 'exception')
@@ -50,6 +66,8 @@ def step_impl(context):
 
 @then(u'a {template} error is returned to the user')
 def step_impl(context, template):
+    print(context.exception.message)
+    print(View.render(template, args=context.input))
     assert context.exception.message == View.render(template, args=context.input)
 
 
@@ -60,7 +78,9 @@ def step_impl(context, template):
 
 @then(u'I expect the cli to return {output}')
 def step_impl(context, output):
-    assert context.test_subject.message == View.render('subtraction_output', args=[ int(x) for x in output.split(', ')])
+    print(View.render('output', args=[ int(x) for x in output.split(', ')]))
+    print(context.test_subject.message)
+    assert context.test_subject.message == View.render('output', args=[ int(x) for x in output.split(', ')])
 
 
 @then(u'I expect the returned object to be valid JSON')

@@ -22,5 +22,5 @@ class Subtraction:
             Here we use mapreduce to subtract from each number in the arguments
             '''
             self.message = map(lambda x: int(x) - int(stdin), self.arguments)
-            self.message = View.render('subtraction_output', self.message)
+            self.message = View.render('output', self.message)
             raise FinishedException
