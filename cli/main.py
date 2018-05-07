@@ -14,19 +14,20 @@ class Main:
 
     def validate(self, arguments):
         if len(arguments) != 6:
-            raise ValidationException('validation_error')
+            raise ValidationException('initial_validation_error')
         for argument in arguments:
             if re.match('.*[^1-9].*', argument) or int(argument) < 0:
-                raise ValidationException('validation_error')
+                raise ValidationException('initial_validation_error')
         self.message = View.render('menu', args=arguments)
 
 
     def dispatch(self, stdin):
-        valid_promises = [Subtraction]
+        promise_classes = [Subtraction]
         try:
             '''
             Here we change the offset of the array to zero indexed and dispatch a new promise
             '''
-            return valid_promises[int(stdin) - 1](self.arguments)
+            return promise_classes[int(stdin) - 1](self.arguments)
         except Exception, exception:
-            raise ValidationException('invalid_input')
+            self.message = View.render('invalid_input')
+            return self

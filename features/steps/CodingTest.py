@@ -49,4 +49,4 @@ def step_impl(context, template):
 
 @then(u'I expect the cli to return {output}')
 def step_impl(context, output):
-    assert context.test_subject.message == [ int(x) for x in output.split(', ')]
+    assert context.test_subject.message == View.render('subtraction_output', args=[ int(x) for x in output.split(', ')])
