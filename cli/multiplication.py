@@ -27,3 +27,7 @@ class Multiplication:
             self.message = json.dumps(args)
             open(stdin.replace('\n', '') + '.json', 'w').write(json.dumps(args))
             raise FinishedException
+
+
+    def get_message(self):
+        return self.message

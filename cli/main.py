@@ -34,3 +34,7 @@ class Main:
         except Exception, exception:
             self.message = View.render('invalid_input')
             return self
+
+
+    def get_message(self):
+        return self.message

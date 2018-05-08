@@ -24,3 +24,7 @@ class Subtraction:
             self.message = map(lambda x: int(x) - int(stdin), self.arguments)
             self.message = View.render('output', self.message)
             raise FinishedException
+
+
+    def get_message(self):
+        return self.message
