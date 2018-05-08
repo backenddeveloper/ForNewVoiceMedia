@@ -17,11 +17,11 @@ if __name__ == '__main__':
         try:
             promise = Main(arguments)
             while True:
-                print promise.get_message()
-                promise = promise.dispatch(sys.stdin.readline())
+                print promise.message
+                promise = promise.dispatch(sys.stdin)
 
         except FinishedException, exception:
-            print promise.get_message()
+            print promise.message
             continue
         except KeyboardInterrupt, signal:
             print "caught signal, exiting cleanly"

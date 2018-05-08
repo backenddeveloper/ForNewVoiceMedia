@@ -12,9 +12,4 @@ class Highest:
 
 
     def dispatch(self, stdin):
-        self.message = ''
         raise FinishedException
-
-
-    def get_message(self):
-        return self.message

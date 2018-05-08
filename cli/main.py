@@ -30,11 +30,7 @@ class Main:
             '''
             Here we change the offset of the array to zero indexed and dispatch a new promise
             '''
-            return promise_classes[int(stdin) - 1](self.arguments)
+            return promise_classes[int(stdin.readline()) - 1](self.arguments)
         except Exception, exception:
             self.message = View.render('invalid_input')
             return self
-
-
-    def get_message(self):
-        return self.message

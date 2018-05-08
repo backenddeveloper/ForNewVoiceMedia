@@ -11,7 +11,8 @@ class Multiplication:
 
 
     def dispatch(self, stdin, open=open):
-        if re.search('[^0-9a-zA-Z]', stdin.replace('\n', '')) or len(stdin) < 3:
+        stdin = stdin.readline().replace('\n', '')
+        if re.search('[^0-9a-zA-Z]', stdin) or len(stdin) < 3:
             self.message = View.render('multiplication_validation_error')
             return self
         else:
@@ -25,9 +26,5 @@ class Multiplication:
                 "Multiplication": reduce(lambda x, y: int(x) * int(y), self.arguments)
             }
             self.message = json.dumps(args)
-            open(stdin.replace('\n', '') + '.json', 'w').write(json.dumps(args))
+            open(stdin + '.json', 'w').write(json.dumps(args))
             raise FinishedException
-
-
-    def get_message(self):
-        return self.message

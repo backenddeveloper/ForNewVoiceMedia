@@ -10,6 +10,7 @@ class Subtraction:
 
 
     def dispatch(self, stdin):
+        stdin = stdin.readline().replace('\n', '')
         try:
             if int(stdin) < 0:
                 self.message = View.render('subtraction_validation_error')
@@ -24,7 +25,3 @@ class Subtraction:
             self.message = map(lambda x: int(x) - int(stdin), self.arguments)
             self.message = View.render('output', self.message)
             raise FinishedException
-
-
-    def get_message(self):
-        return self.message
