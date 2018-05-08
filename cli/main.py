@@ -19,7 +19,7 @@ class Main:
         if len(arguments) != 6:
             raise ValidationException('initial_validation_error')
         for argument in arguments:
-            if re.match('.*[^1-9].*', argument) or int(argument) < 0:
+            if re.search('[^0-9]', argument) or int(argument) < 0:
                 raise ValidationException('initial_validation_error')
         self.message = View.render('menu', args=arguments)
 

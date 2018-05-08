@@ -25,5 +25,5 @@ class Multiplication:
                 "Multiplication": reduce(lambda x, y: int(x) * int(y), self.arguments)
             }
             self.message = json.dumps(args)
-            open(stdin + '.json', 'w').write(json.dumps(args))
+            open(stdin.replace('\n', '') + '.json', 'w').write(json.dumps(args))
             raise FinishedException
