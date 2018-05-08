@@ -1,6 +1,6 @@
-import re
 from cli.exceptions import FinishedException
 from cli.view import View
+
 
 class Highest:
 
@@ -9,7 +9,6 @@ class Highest:
         arguments.sort()
         arguments.reverse()
         self.message = View.render('output', args=arguments)
-
 
     def dispatch(self, stdin):
         raise FinishedException

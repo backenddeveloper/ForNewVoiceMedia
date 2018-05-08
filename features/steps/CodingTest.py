@@ -2,13 +2,14 @@ import json
 from behave import given, then, when
 from mock import MagicMock as Mock
 
-from cli.exceptions import FinishedException, ValidationException
+from cli.exceptions import FinishedException
 from cli.main import Main
 from cli.view import View
 
 
 def get_stdin(line):
     return Mock(readline=Mock(return_value=line))
+
 
 @given(u'I have an input such as {input}')
 def step_impl(context, input):
@@ -33,7 +34,7 @@ def step_impl(context, number):
     try:
         context.test_subject = context.test_subject.dispatch(get_stdin(1))
         context.test_subject = context.test_subject.dispatch(get_stdin(number))
-    except FinishedException, exception:
+    except FinishedException:
         context.output = context.test_subject.message
 
 
@@ -42,7 +43,7 @@ def step_impl(context):
     try:
         context.test_subject = context.test_subject.dispatch(get_stdin(2))
         context.test_subject = context.test_subject.dispatch(get_stdin('testfilename'), open=Mock(return_value=Mock()))
-    except FinishedException, exception:
+    except FinishedException:
         context.output = context.test_subject.message
 
 
@@ -50,7 +51,7 @@ def step_impl(context):
 def step_impl(context):
     try:
         context.test_subject = context.test_subject.dispatch(get_stdin(3))
-    except FinishedException, exception:
+    except FinishedException:
         context.output = context.test_subject.message
 
 
@@ -58,7 +59,7 @@ def step_impl(context):
 def step_impl(context):
     try:
         context.test_subject = context.test_subject.dispatch(get_stdin(4))
-    except FinishedException, exception:
+    except FinishedException:
         context.output = context.test_subject.message
 
 
@@ -79,7 +80,7 @@ def step_impl(context, template):
 
 @then(u'I expect the cli to return {output}')
 def step_impl(context, output):
-    assert context.test_subject.message == View.render('output', args=[ int(x) for x in output.split(', ')])
+    assert context.test_subject.message == View.render('output', args=[int(x) for x in output.split(', ')])
 
 
 @then(u'I expect the returned object to be valid JSON')

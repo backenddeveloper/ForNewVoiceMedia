@@ -9,11 +9,9 @@ from cli.view import View
 
 class Main:
 
-
     def __init__(self, arguments):
         self.validate(arguments)
         self.arguments = arguments
-
 
     def validate(self, arguments):
         if len(arguments) != 6:
@@ -23,14 +21,14 @@ class Main:
                 raise ValidationException('initial_validation_error')
         self.message = View.render('menu', args=arguments)
 
-
     def dispatch(self, stdin):
         promise_classes = [Subtraction, Multiplication, Highest, Lowest]
         try:
             '''
-            Here we change the offset of the array to zero indexed and dispatch a new promise
+            Here we change the offset of the array to zero indexed
+            and dispatch a new promise
             '''
             return promise_classes[int(stdin.readline()) - 1](self.arguments)
-        except Exception, exception:
+        except Exception:
             self.message = View.render('invalid_input')
             return self

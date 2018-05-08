@@ -1,6 +1,6 @@
-import re
-from cli.exceptions import FinishedException, ValidationException
+from cli.exceptions import FinishedException
 from cli.view import View
+
 
 class Subtraction:
 
@@ -8,14 +8,13 @@ class Subtraction:
         self.arguments = arguments
         self.message = View.render('subtraction_usage')
 
-
     def dispatch(self, stdin):
         stdin = stdin.readline().replace('\n', '')
         try:
             if int(stdin) < 0:
                 self.message = View.render('subtraction_validation_error')
                 return self
-        except ValueError, exception:
+        except ValueError:
                 self.message = View.render('subtraction_validation_error')
                 return self
         else:

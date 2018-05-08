@@ -2,10 +2,9 @@ import sys
 
 from cli.exceptions import FinishedException, ValidationException
 from cli.main import Main
-from cli.view import View
 
 if __name__ == '__main__':
-    
+
     '''
     First we remove the name of this script from the arguments
     '''
