@@ -7,6 +7,9 @@ from cli.main import Main
 from cli.view import View
 
 
+def get_stdin(line):
+    return Mock(readline=Mock(return_value=line))
+
 @given(u'I have an input such as {input}')
 def step_impl(context, input):
     context.input = input.split(' ')
@@ -28,8 +31,8 @@ def step_impl(context):
 @when(u'I subtract a {number:w}')
 def step_impl(context, number):
     try:
-        context.test_subject = context.test_subject.dispatch(1)
-        context.test_subject = context.test_subject.dispatch(number)
+        context.test_subject = context.test_subject.dispatch(get_stdin(1))
+        context.test_subject = context.test_subject.dispatch(get_stdin(number))
     except FinishedException, exception:
         context.output = context.test_subject.message
 
@@ -37,8 +40,8 @@ def step_impl(context, number):
 @when(u'I calculate a the product')
 def step_impl(context):
     try:
-        context.test_subject = context.test_subject.dispatch(2)
-        context.test_subject = context.test_subject.dispatch('testfilename', open=Mock(return_value=Mock()))
+        context.test_subject = context.test_subject.dispatch(get_stdin(2))
+        context.test_subject = context.test_subject.dispatch(get_stdin('testfilename'), open=Mock(return_value=Mock()))
     except FinishedException, exception:
         context.output = context.test_subject.message
 
@@ -46,7 +49,7 @@ def step_impl(context):
 @when(u'I order the numbers highest to lowest')
 def step_impl(context):
     try:
-        context.test_subject = context.test_subject.dispatch(3)
+        context.test_subject = context.test_subject.dispatch(get_stdin(3))
     except FinishedException, exception:
         context.output = context.test_subject.message
 
@@ -54,7 +57,7 @@ def step_impl(context):
 @when(u'I order the numbers lowest to highest')
 def step_impl(context):
     try:
-        context.test_subject = context.test_subject.dispatch(4)
+        context.test_subject = context.test_subject.dispatch(get_stdin(4))
     except FinishedException, exception:
         context.output = context.test_subject.message
 
@@ -66,8 +69,6 @@ def step_impl(context):
 
 @then(u'a {template} error is returned to the user')
 def step_impl(context, template):
-    print(context.exception.message)
-    print(View.render(template, args=context.input))
     assert context.exception.message == View.render(template, args=context.input)
 
 
@@ -78,8 +79,6 @@ def step_impl(context, template):
 
 @then(u'I expect the cli to return {output}')
 def step_impl(context, output):
-    print(View.render('output', args=[ int(x) for x in output.split(', ')]))
-    print(context.test_subject.message)
     assert context.test_subject.message == View.render('output', args=[ int(x) for x in output.split(', ')])
 
 
