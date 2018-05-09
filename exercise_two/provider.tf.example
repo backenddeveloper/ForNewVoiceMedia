@@ -1,0 +1,11 @@
+#
+#  Example provider for Terraform scripts
+#
+#  @Author GDev
+#
+
+provider "aws" {
+    region     = "eu-west-1"
+    access_key = ""
+    secret_key = ""
+}

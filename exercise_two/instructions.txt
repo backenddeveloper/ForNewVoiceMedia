@@ -1,0 +1,13 @@
+Task: Setup VPN connectivity between 2 VPC’s in AWS:
+
+Create VPN connectivity between 2 VPCs in AWS
+
+Capture traffic between an instance in each VPC
+
+The candidate should be able to:
+
+Overview their design, software and deployment choices and the reasoning behind them.
+
+Identify areas for improvement within the infrastructure discussing security, resilience, scalability and maintainability considerations.
+
+Define and describe a process for managing VPN maintenance with zero downtime
